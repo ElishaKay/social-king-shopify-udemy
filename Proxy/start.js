@@ -11,8 +11,10 @@ const app = express();
 app.use(morgan('dev'));
 app.use(bodyParser.json({limit: '200mb', extended: true}))
 app.use(bodyParser.urlencoded({limit: '200mb', extended: true}))
-
 app.use(cors({ origin: "*" }));
+
+// Related to Shopify App
+app.set('trust proxy', 1);
 
 // Send everything from this route back as liquid.
 app.use((req, res, next) => {
@@ -21,7 +23,7 @@ app.use((req, res, next) => {
 });
 
 // port
-const port = process.env.PORT || 8000;
+const port = process.env.PORT || 7777;
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
     process.on('uncaughtException', function(err) {
